@@ -1,4 +1,6 @@
-         mov ax,0xb800                 ;es¼Ä´æÆ÷Ö¸ÏòÎÄ±¾Ä£Ê½µÄÏÔÊ¾»º³åÇø
+         SECTION .text
+         mov ax,0xb800                 ;esï¿½Ä´ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ä±ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
          mov es,ax
 
          mov byte [es:0x00],'z'
@@ -28,55 +30,53 @@
          mov byte [es:0x18],':'
          mov byte [es:0x19],0x07
 
-         mov ax,number                 ;È¡µÃ±êºÅnumberµÄÆ«ÒÆµØÖ·
-         mov bx,10                     ;bx±£´æ±»³ýÊý,divÖ¸ÁîÊ¹ÓÃbx¼Ä´æÆ÷µÄÖµ×÷Îª±»³ýÊý
+         mov ax,number                 ;È¡ï¿½Ã±ï¿½ï¿½numberï¿½ï¿½Æ«ï¿½Æµï¿½Ö·
+         mov bx,10                     ;bxï¿½ï¿½ï¿½æ±»ï¿½ï¿½ï¿½ï¿½,divÖ¸ï¿½ï¿½Ê¹ï¿½ï¿½bxï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
          mov cx,cs
          mov ds,cx
 
          mov dx,0
          div bx
-         mov [0x7c00+number+0x00],dl   ;±£´æ¸öÎ»ÉÏµÄÊý×Ö
-
-         ;ÇóÊ®Î»ÉÏµÄÊý×Ö
-         xor dx,dx
-         div bx
-         mov [0x7c00+number+0x01],dl   ;±£´æÊ®Î»ÉÏµÄÊý×Ö
+         mov [0x7d00+number+0x00],dl   ;ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 
          xor dx,dx
          div bx
-         mov [0x7c00+number+0x02],dl   ;±£´æ°ÙÎ»ÉÏµÄÊý×Ö
-
-         ;ÇóÇ§Î»ÉÏµÄÊý×Ö
-         xor dx,dx
-         div bx
-         mov [0x7c00+number+0x03],dl   ;±£´æÇ§Î»ÉÏµÄÊý×Ö
+         mov [0x7d00+number+0x01],dl   ;ï¿½ï¿½ï¿½ï¿½Ê®Î»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 
          xor dx,dx
          div bx
-         mov [0x7c00+number+0x04],dl   ;±£´æÍòÎ»ÉÏµÄÊý×Ö
+         mov [0x7d00+number+0x02],dl   ;ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
 
-         mov al,[0x7c00+number+0x04]    ;½«¼ÆËã½á¹ûËÍµ½al¼Ä´æÆ÷ÖÐ
-         add al,0x30                    ;¼ÓÉÏ0x30µÃµ½Õâ¸öÊý×ÖµÄASCIIÂë
-         mov [es:0x1a],al               ;µÃµ½µÄASCIIÂëËÍµ½Ö¸¶¨µÄÎ»ÖÃ
-         mov byte [es:0x1b],0x04        ;ÏÔÊ¾ÊôÐÔÎªºÚµ×ºì×Ö£¬ÎÞÉÁË¸ÎÞ¼ÓÁÁ
+         xor dx,dx
+         div bx
+         mov [0x7d00+number+0x03],dl   ;ï¿½ï¿½ï¿½ï¿½Ç§Î»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
+
+         xor dx,dx
+         div bx
+         mov [0x7d00+number+0x04],dl   ;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½
+
+         mov al,[0x7d00+number+0x04]    ;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½alï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
+         add al,0x30                    ;ï¿½ï¿½ï¿½ï¿½0x30ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ASCIIï¿½ï¿½
+         mov [es:0x1a],al               ;ï¿½Ãµï¿½ï¿½ï¿½ASCIIï¿½ï¿½ï¿½Íµï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+         mov byte [es:0x1b],0x04        ;ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Îªï¿½Úµ×ºï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½Þ¼ï¿½ï¿½ï¿½
          
-         mov al,[0x7c00+number+0x03]
+         mov al,[0x7d00+number+0x03]
          add al,0x30
          mov [es:0x1c],al
          mov byte [es:0x1d],0x04
          
-         mov al,[0x7c00+number+0x02]
+         mov al,[0x7d00+number+0x02]
          add al,0x30
          mov [es:0x1e],al
          mov byte [es:0x1f],0x04
 
-         mov al,[0x7c00+number+0x01]
+         mov al,[0x7d00+number+0x01]
          add al,0x30
          mov [es:0x20],al
          mov byte [es:0x21],0x04
 
-         mov al,[0x7c00+number+0x00]
+         mov al,[0x7d00+number+0x00]
          add al,0x30
          mov [es:0x22],al
          mov byte [es:0x23],0x04
@@ -84,8 +84,9 @@
          mov byte [es:0x24],'D'
          mov byte [es:0x25],0x07
           
-   infi: jmp near infi                 ;ÎÞÏÞÑ­»·
-      
+   infi: 
+       jmp near infi
+
   number db 0,0,0,0,0
   
   times 203 db 0

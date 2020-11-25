@@ -1,8 +1,12 @@
 
-ASMFILE=c05_mbr.asm
+asmFile=c05_mbr.asm
+binFile=$(asmFile).bin
+vhdFile=$(binFile).vhd
+imgFile=$(binFile).img
 
-all:$(ASMFILE)
-	nasm -f bin $(ASMFILE) -o mbr.bin
-	rm -rf myfile.vhd
-	VBoxManage convertfromraw mbr.bin myfile.vhd --format VHD --variant Fixed
-	dd if=mbr.bin of=a.img bs=512 count=1 conv=notrunc
+all:$(asmFile)
+	nasm -f bin $(asmFile) -o $(binFile)
+	rm -rf $(vhdFile)
+	VBoxManage convertfromraw $(binFile) $(vhdFile) --format VHD --variant Fixed
+	dd if=$(binFile) of=$(imgFile) bs=512 count=1 conv=notrunc
+	
